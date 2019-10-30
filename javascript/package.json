@@ -1,0 +1,24 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.6.2",
+    "elliptic": "^6.5.1",
+    "eosjs-ecc": "^4.0.7",
+    "ethers": "^4.0.37",
+    "js-base64": "^2.5.1",
+    "node-fetch": "^2.6.0",
+    "react-native-scrypt": "^1.0.0",
+    "validid": "^1.0.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.6.2"
+  }
+}
