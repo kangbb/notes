@@ -77,6 +77,18 @@ defn page []
        :component-did-update (fn [this old-argv] (println "update"))})))
 ```
 
+此方法和`React`中使用的一致，但是存在一个问题：
+
+- `withNavigationFocus`中的组件初次挂在时，会渲染两次。(也许是`react-navigation`的问题)
+
+通过增加组件的方式解决：
+
+```clj
+ [:> (withNavigationFocus (r/reactify-component
+                            (fn [{:keys [isFocused]}]
+                              [camera isFocused])))]
+```
+
 ### 方法三
 
 将`Camera`组件所在页面和`BottomTabNavigator`放在同一个`StackNavigator`中，原先的`tab`用另一个`stack`代替，内容随意。自定义`tab navigation`，点击
