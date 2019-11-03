@@ -6,6 +6,15 @@
 
 input(reader forms) -> reader -> output(data structures) -> evaluator -> result.
 
+> 注意：
+>
+> `reader form`:  textual representation of data structures
+>
+> 其中`reader`只是将 `textual`形式转换为`evaluator`可识别的形式
+>
+> 其处理过程却并不简单：
+> The reader can employ more complex behavior when converting text to data structures.
+
 常见函数：
 
 - `read-string`, 可以模拟`reader`的函数
