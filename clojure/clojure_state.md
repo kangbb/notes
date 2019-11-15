@@ -269,3 +269,43 @@
 继续优化，可以学习下面这个库：
 
 [http://clojuredocs.org/clojure.core.reducers](http://clojuredocs.org/clojure.core.reducers)
+
+## 补充 `agent`
+
+>- 只能在`clojure`中使用.
+>- 不修改其它为非当前类型的值
+>- `agent`,代理,其含义是: 执行他人发送而来的`action`。每个`action`类型的`symbol`只有一个代理，每个每次只能执行一个`action`。所以，不同线程之间不需要`coordinate`。
+
+**创建**
+
+```clj
+(def a (agent 100))
+```
+
+**修改**
+
+- `send`
+- `send-off`
+
+两者的区别在于使用不同的线程池。具体参考：
+> The `send` function uses a "fixed thread pool" (see the newFixedThreadPool method in java.util.concurrent.Executors) where the number of threads is the number of processors plus two.If all of those threads are busy, the action doesn't run until one becomes available.
+
+>The `send-off` function uses a "cached thread pool" (see the newCachedThreadPool method in java.util.concurrent.Executors) where existing threads in the pool are used if available and new threads are added otherwise
+
+修改值的过程是异步的。例如：
+
+```clj
+(def a (agent 100))
+(future (send a + 10000) (println @a))
+;;=> 100
+;;=> #object[clojure.core$future_call$reify__8439 0x7383d78c {:status :pending, :val nil}]
+```
+
+**等待/阻塞**
+
+- `wait`
+- `wait-for`
+
+接受一系列`action`，阻塞当前线程，直到所有`action`完成。
+
+
